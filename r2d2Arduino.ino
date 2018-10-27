@@ -18,6 +18,11 @@ const int ledNegacao = 9;
 const int ledNormal = 10;
 const int ledLanterna = 11;
 
+// definindo configuracoes para o arduino
+const int girar = 500;
+const int andar = 2000;
+long balanca = 1000;
+
 void pararMotores(){
   digitalWrite(MotorDLOW1, LOW);
   digitalWrite(MotorDLOW2, LOW);
@@ -50,6 +55,9 @@ void setup(){
   pinMode(MotorELOW2, OUTPUT);
 
   pararMotores();
+  apagarLeds();
+  digitalWrite(ledNormal, HIGH);
+  ledAceso = 1;
 }
 
 void frente(){
@@ -107,12 +115,12 @@ void balancar(){
     digitalWrite(MotorDLOW2, LOW);
     digitalWrite(MotorELOW1, LOW);
     digitalWrite(MotorELOW2, HIGH);
-    delay(1000);
+    delay(balanca);
     digitalWrite(MotorDLOW1, LOW);
     digitalWrite(MotorDLOW2, HIGH);
     digitalWrite(MotorELOW1, HIGH);
     digitalWrite(MotorELOW2, LOW);
-    delay(1000);
+    delay(balanca);
   }
   pararMotores();
 }
@@ -159,34 +167,34 @@ void loop(){
           // andar para frente
           pararMotores();
           frente();
-          delay(2000);
+          delay(andar);
           pararMotores();
         break;
         case 'b':
           // andar para tras
           pararMotores();
           tras();
-          delay(2000);
+          delay(andar);
           pararMotores();
         break;
         case 'c':
           // andar para esquerda
           pararMotores();
           esquerda();
-          delay(1000);
+          delay(girar);
           pararMotores();
           frente();
-          delay(2000);
+          delay(andar);
           pararMotores();
         break;
         case 'd':
           // andar para direita
           pararMotores();
           direita();
-          delay(1000);
+          delay(girar);
           pararMotores();
           frente();
-          delay(2000);
+          delay(andar);
           pararMotores();
         break;
         case 'e':
@@ -207,14 +215,14 @@ void loop(){
           // virar para esquerda
           pararMotores();
           esquerda();
-          delay(500);
+          delay(girar);
           pararMotores();
         break;
         case 'i':
           // virar para direita
           pararMotores();
           direita();
-          delay(500);
+          delay(girar);
           pararMotores();
         break;
         case 'j':
